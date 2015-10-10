@@ -129,8 +129,52 @@
             android:layout_marginLeft="@dimen/view_margin"/>
     </LinearLayout>
 
+    <!--性別-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/bloodTypeLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="@dimen/view_margin"
+        android:id="@+id/sexLayout">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/sex"/>
 
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/view_margin">
 
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/men"
+                android:id="@+id/menRadioButton"
+                android:checked="true"/>
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/women"
+                android:id="@+id/womenRadioButton"/>
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <!--実行ボタン-->
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/commit"
+        android:id="@+id/divineButton"
+        android:layout_below="@id/sexLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/view_margin"/>
 
 </RelativeLayout>
