@@ -2,6 +2,9 @@ package com.example.makoto_o.uranaiapp;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -40,6 +43,43 @@ public class MainActivity extends AppCompatActivity {
         yearSpinner.setAdapter(createYearAdapter());
         monthSpinner.setAdapter(createMonthAdapter());
         daySpinner.setAdapter(createDayAdapter());
+
+        // Spinnerで値が選択されたときイベント
+        // 月選択用Spinnerにリスナーを設定する
+
+        //litnerの文法
+        //○○Listner(new xxListner() {
+        //  イベントが発生した時の処理
+        // };
+        //
+        monthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            //選択されている月が変わった（何か選択された）時の処理
+            // patent : setOnItemSelectedListenerを設定したビュー
+            // view : 実際に選択されたビュー
+            // position : 何行目が選択されたか。1950が選択されると0
+            // id : positionと同じ
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                daySpinner.setAdapter(createDayAdapter());
+                Log.d("monthSpinner", "onItemSelectedが選ばれました。");
+
+            }
+
+            @Override
+            //何も選択していない時の処理
+            public void onNothingSelected(AdapterView<?> parent) {
+                Log.d("monthSpinner", "onNothingSelectedがよばれました。");
+            }
+        });
+
+       // Button button = new Button(this);
+       // button.setOnClickListener(new View.OnClickListener() {
+       //  @Override
+       //    public void onClick(View v) {
+       //
+       //  }
+       // });
+
 
 
     }
@@ -87,8 +127,17 @@ public class MainActivity extends AppCompatActivity {
         // ドロップダウン時の画面レイアウトを設定
         dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+        //1.今、何月が選択されているかを取得する。
+        Integer month = (Integer) monthSpinner.getSelectedItem();
+
+        //2.選択されている月が４月、６月、9月、11月のいずれかの時、日の上限を30日とする。
+        // == 同じ
+        // || もしくは
+         Integer day = 31;
+        if (month == 4 || month == 6 || month == 9 || month == 11) {
+            day = 30;
+        }
         // for文を回してArrayAdapterに値をセット
-        Integer day = 31;
         for (int i = 1; i <= day; i++) {
             dayAdapter.add(i);
         }
